@@ -1,0 +1,254 @@
+
+.order_plan_start,.order_plan_stop,.order_step, .order_state_ontrack,.order_state_risk{
+    padding: 10px;
+    border-radius: 15px;
+    color: white;
+    font-size: 16px;
+    width: 120px;
+}
+.order_plan_start{
+    background-color: royalblue;
+
+}
+.order_plan_stop{
+    background-color: royalblue;
+
+}
+.order_step{
+    background-color: mediumseagreen;
+}
+.order_state_ontrack,.order_state_risk{
+    margin-top: -5px;
+    padding-top: 14px;
+}
+.order_state_ontrack{
+    background-image: url(../Images/orderpopup.png);
+    background-position: center;
+    background-size: 135px 38px;
+    background-repeat: no-repeat;
+}
+.order_state_risk{
+    background-image: url(../Images/orderriskpopup.png);
+    background-position: center;
+    background-size: 135px 38px;
+    background-repeat: no-repeat;
+}
+.washingTitle{
+    width: 50%;
+    background-color: forestgreen;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+.odr_fin_panel{
+    border-radius: 10px;
+    border-left-color: #ADADAD; 
+    border-left-style: solid; 
+    border-left-width: 2px;
+    border-right-color: #ADADAD; 
+    border-right-style: solid; 
+    border-right-width: 2px;
+}
+.qtyLabel{
+    padding-left: 10px;
+    width: 70px;
+    height: 25px;
+    background-color: darkcyan ;
+    color: white;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+.outletDiv{    
+    width: 180px;
+    height: 200px;
+    margin-left: 40px;
+    margin-top: 20px;
+    padding-left: 40px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+
+    border-radius: 20px;
+    background-color: #9999ff;
+    box-shadow: 0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #001135;
+
+    background: -moz-linear-gradient(left,  rgba(30,87,153,1) 0%, rgba(30,87,153,1) 9%, rgba(41,137,216,1) 12%, rgba(32,98,167,1) 81%, rgba(30,88,154,0.8) 98%, rgba(30,87,153,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  rgba(30,87,153,1) 0%,rgba(30,87,153,1) 9%,rgba(41,137,216,1) 12%,rgba(32,98,167,1) 81%,rgba(30,88,154,0.8) 98%,rgba(30,87,153,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  rgba(30,87,153,1) 0%,rgba(30,87,153,1) 9%,rgba(41,137,216,1) 12%,rgba(32,98,167,1) 81%,rgba(30,88,154,0.8) 98%,rgba(30,87,153,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#001e5799',GradientType=1 ); /* IE6-9 */
+    overflow: hidden;
+    transition: all 0.2s linear 0s;
+    -webkit-transition: all 0.2s linear 0s;
+    -o-transition: all 0.2s linear 0s;
+
+    cursor: pointer;
+
+    color: #E7E7E7;
+
+    float: left;
+}
+
+.outletDiv:hover{
+    box-shadow: 0px 1px 0px #999, 0px 2px 0px cyan, 0px 3px 0px cyan, 0px 4px 0px cyan, 0px 5px 0px cyan, 0px 6px 0px cyan, 0px 7px 0px #333, 0px 8px 7px cyan;
+
+}
+
+.outletName{
+    margin-top: 5px;
+    font-size: 18px;
+
+    color: gold;
+}
+.customer_order_item{
+    margin: 5px;
+    padding :10px;
+    width: 450px;
+
+    background: -moz-linear-gradient(top, rgba(30,87,153,1) 0%, rgba(30,87,153,1) 12%, rgba(41,137,216,1) 50%, rgba(31,89,156,1) 89%, rgba(30,87,153,1) 91%, rgba(30,87,153,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(30,87,153,1) 12%,rgba(41,137,216,1) 50%,rgba(31,89,156,1) 89%,rgba(30,87,153,1) 91%,rgba(30,87,153,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(30,87,153,1) 12%,rgba(41,137,216,1) 50%,rgba(31,89,156,1) 89%,rgba(30,87,153,1) 91%,rgba(30,87,153,1) 100%); 
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    font-size: 14px;
+
+    cursor: pointer;
+    color: #FFFFFF;
+    border-radius: 10px;
+}
+.customer_order_item:hover{
+    background: none;
+    background-color: #6699ff;    
+    transition: all 0.2s linear 0s;
+    -webkit-transition: all 0.2s linear 0s;
+    -o-transition: all 0.2s linear 0s;
+}
+
+.customer_finance_item{
+    margin: 5px;
+    padding :10px;
+    width: 450px;
+
+    background: rgb(113,168,107); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(113,168,107,1) 0%, rgba(66,147,19,1) 50%, rgba(113,168,107,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(113,168,107,1) 0%,rgba(66,147,19,1) 50%,rgba(113,168,107,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(113,168,107,1) 0%,rgba(66,147,19,1) 50%,rgba(113,168,107,1) 100%);
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    font-size: 14px;
+    cursor: pointer;
+    color: #FFFFFF;
+    border-radius: 10px;
+}
+
+.customer_finance_item:hover{
+    background: none;
+    background-color: #81be45;    
+    transition: all 0.2s linear 0s;
+    -webkit-transition: all 0.2s linear 0s;
+    -o-transition: all 0.2s linear 0s;
+}
+
+.customer_finance_pending_item{
+    margin: 5px;
+    padding :10px;
+    width: 450px;
+
+    background: -moz-linear-gradient(top, rgba(191,130,38,0.8) 0%, rgba(183,84,34,1) 47%, rgba(183,81,34,0.99) 50%, rgba(191,130,38,0.8) 99%, rgba(191,130,38,0.8) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(191,130,38,0.8) 0%,rgba(183,84,34,1) 47%,rgba(183,81,34,0.99) 50%,rgba(191,130,38,0.8) 99%,rgba(191,130,38,0.8) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(191,130,38,0.8) 0%,rgba(183,84,34,1) 47%,rgba(183,81,34,0.99) 50%,rgba(191,130,38,0.8) 99%,rgba(191,130,38,0.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    font-size: 14px;
+
+    cursor: pointer;
+    color: #FFFFFF;
+    border-radius: 10px;
+}
+
+.customer_finance_pending_item:hover{
+    background: none;
+    background-color: coral;    
+    transition: all 0.2s linear 0s;
+    -webkit-transition: all 0.2s linear 0s;
+    -o-transition: all 0.2s linear 0s;
+}
+.customerduelabel{
+    font-size:20px; 
+    color : white;
+    padding: 10px;
+
+    background: -moz-linear-gradient(top, rgba(191,130,38,0.8) 0%, rgba(183,84,34,1) 47%, rgba(183,81,34,0.99) 50%, rgba(191,130,38,0.8) 99%, rgba(191,130,38,0.8) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(191,130,38,0.8) 0%,rgba(183,84,34,1) 47%,rgba(183,81,34,0.99) 50%,rgba(191,130,38,0.8) 99%,rgba(191,130,38,0.8) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(191,130,38,0.8) 0%,rgba(183,84,34,1) 47%,rgba(183,81,34,0.99) 50%,rgba(191,130,38,0.8) 99%,rgba(191,130,38,0.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+    border-radius: 10px;
+
+}
+.prohead{
+    width: 100%;
+    background-color: #6495ED;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 30px;
+}
+.proqty{ 
+    font-size: 18px;  
+    width: 100%; 
+    background-color: #DAA520;
+    color: Maroon;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 30px;
+    border-radius: 10px;
+}
+.proiqty{ 
+    font-size: 18px;  
+    width: 100%; 
+    background-color: #20B2AA;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 30px;
+    border-radius: 10px;
+}
+.proupdatebtn{
+    font-size: 18px;  
+    width: 100%; 
+    background-color: #6495ED;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 30px;
+    border-radius: 10px;
+}
+
+.prohead2{
+    text-indent:10px;
+    width: 95%;
+    background-color:#4682B4;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}  
+.proprintbtn{
+    background-color: #6495ED; 
+    color: white; 
+    width: 200px; 
+    height: 30px; 
+    border: none;
+    transition: all 0.2s linear 0s;
+    -webkit-transition: all 0.2s linear 0s;
+    -o-transition: all 0.2s linear 0s;
+}
+.proprintbtn:hover{
+    background-color: #666;
+    color: white;
+}

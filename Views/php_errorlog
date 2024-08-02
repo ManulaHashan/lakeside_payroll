@@ -1,0 +1,2 @@
+[19-Sep-2020 21:18:32 CST6CDT] PHP Parse error:  syntax error, unexpected end of file, expecting variable (T_VARIABLE) or ${ (T_DOLLAR_OPEN_CURLY_BRACES) or {$ (T_CURLY_OPEN) in /home/appexsl2/public_html/satlo/Views/emp_manage.php on line 627
+[19-Sep-2020 21:18:37 CST6CDT] PHP Parse error:  syntax error, unexpected end of file in /home/appexsl2/public_html/satlo/Views/emp_manage.php on line 695

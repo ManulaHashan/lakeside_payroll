@@ -1,0 +1,116 @@
+/* 
+    Created on : Oct 6, 2016, 1:16:32 PM
+    Author     : PASI
+*/
+
+/*------------------------index page css begin-----------------------------------*/
+::selection { background-color: #E13300; color: white; }
+            ::-moz-selection { background-color: #E13300; color: white; }
+
+            body {
+                background-color: #fff;
+                margin-top: 20%;
+                font: 13px/20px normal Helvetica, Arial, sans-serif;
+                color: #4F5155;
+            }
+
+            a {
+                color: #003399;
+                background-color: transparent;
+                font-weight: normal;
+            }
+
+            h1 {
+                color: #444;
+                background-color: transparent;
+                border-bottom: 1px solid #D0D0D0;
+                font-size: 19px;
+                font-weight: normal;
+                margin: 0 0 14px 0;
+                padding: 14px 15px 10px 15px;
+            }
+
+            code {
+                font-family: Consolas, Monaco, Courier New, Courier, monospace;
+                font-size: 12px;
+                background-color: #f9f9f9;
+                border: 1px solid #D0D0D0;
+                color: #002166;
+                display: block;
+                margin: 14px 0 14px 0;
+                padding: 12px 10px 12px 10px;
+            }
+
+            #body {
+                margin: 0 15px 0 15px;
+            }
+
+            p.footer {
+                text-align: right;
+                font-size: 11px;
+                border-top: 1px solid #D0D0D0;
+                line-height: 32px;
+                padding: 0 10px 0 10px;
+                margin: 20px 0 0 0;
+            }
+
+            #container {
+                margin: auto;
+                border: 1px solid #D0D0D0;
+                border-radius: 10px;
+                width: 400px;
+                box-shadow: 0 0 10px #D0D0D0;
+            }
+
+            .div_text{
+                margin: 10px;
+
+            }
+
+            .fill_text{
+                border-radius: 3px;
+                height: 20px;
+                width: 300px;
+                margin: 5px;
+                font-family: cursive;
+                font-style: initial;
+                font-size: medium;
+                font-weight: 500;
+
+            }
+
+            #logo_img{
+                margin: 5px;
+                width: 380px;
+                height: 70px;
+                alignment-adjust: middle;
+            }
+
+            .button{
+                border-radius: 5px;
+                background-color: white;
+                color: black;
+                margin-left: 222px;
+                width: 100px;
+                height: 30px;
+                font-family: cursive;
+                font-style: initial;
+                font-size: medium;
+                font-weight: 500;
+                margin-bottom: 20px;
+            }
+
+            .button:hover {
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+                border: 1px solid #f9f9f9;
+            }
+
+            .div_check{
+                margin-left: 10px;
+                margin-right: 70px;
+            }
+
+            .table_inside{
+                margin-left: 15px;
+            }
+/*------------------------index page css end-----------------------------------*/
