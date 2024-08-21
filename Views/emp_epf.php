@@ -219,9 +219,9 @@ include '../DB/DB.php';
                                         <table border="1" class="table table-bordered"
                                             style="border-collapse: collapse; width:70%;">
                                             <tr>
-                                                <td><b>Derana Medical Laboratory Testing Services (Pvt) Ltd.</b><br>
-                                                    No. 553/A, Madiwela Road,<br>
-                                                    Thalawathugoda.
+                                                <td><b>Lakeside Adventist Hospital</b><br>
+                                                    40 Sangaraja Mawatha, <br>
+                                                    Kandy.
                                                 </td>
                                             </tr>
                                             <tr>

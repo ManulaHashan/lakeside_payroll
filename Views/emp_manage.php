@@ -1884,7 +1884,7 @@ while ($result = mysqli_fetch_assoc($res)) {
 
                                             <tr>
                                                 <td height="35px;" width="225px;">
-                                                    <p class="form-label">Bank Acc. Name With Branch</p>
+                                                    <p class="form-label">Bank Name With Branch</p>
                                                 </td>
                                                 <td><input id="bbr" type="text" name="bbr" class="input-text"></td>
                                             </tr>
@@ -2032,9 +2032,8 @@ while ($result = mysqli_fetch_assoc($res)) {
                                                 </td>
                                                 <td><select name="wrk_typ" id="wrk_typ" class="select-basic"
                                                         style="width: 186px" onchange="changeWorkingTypeMeth()">
-                                                        <option value="1">General</option>
-                                                        <option value="2">Shift Base</option>
-                                                        <option value="3">Hourly Basis</option>
+                                                        <option value="1">Hourly Basis</option>
+                                                        <option value="2">Shift Basis</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -2099,11 +2098,11 @@ while ($result = mysqli_fetch_assoc($res)) {
                                             </tr>
                                             <tr id="req_tp">
 
-
+                                                <!-- 
                                                 <td colspan="2" id="time_profile">
                                                     <input type="button" style="width: 230px" class="btn btn-dark"
                                                         value="Manage Time Profile" onclick="loadTimeProf()" />
-                                                </td>
+                                                </td> -->
                                                 <!-- <td>
                                         <input type="button" style="width: 100px" class="btn btn-danger" value="Resign" onclick="resignDetails()"/>
                                     </td> -->
@@ -2694,7 +2693,6 @@ while ($result = mysqli_fetch_assoc($res)) {
                                             <select id="active" class="select-basic" style="width: 100px;">
                                                 <option value="1">Active</option>
                                                 <option value="0">Not-Active</option>
-                                                <option value="2">Pending</option>
                                             </select>
                                             &nbsp;&nbsp;
                                             Search <img src="../Icons/search.png" onclick="loadTable()"
@@ -2809,9 +2807,9 @@ while ($result = mysqli_fetch_assoc($res)) {
                                                                         onclick="insertBranch()"
                                                                         class="btn btn-primary"></td>
                                                                 <td>&nbsp;&nbsp;&nbsp;</td>
-                                                                <td><input type="button" id="updip" value="Update"
+                                                                <!-- <td><input type="button" id="updip" value="Update"
                                                                         onclick="updateBranch()"
-                                                                        class="btn btn-warning"></td>
+                                                                        class="btn btn-warning"></td> -->
                                                             </tr>
                                                         </table>
                                                         <table>

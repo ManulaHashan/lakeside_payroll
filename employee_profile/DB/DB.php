@@ -41,7 +41,7 @@ function Search($query)
 {
     $DB = new Database();
     $res = mysqli_query($DB->getConnection(), $query);
-    if (mysqli_errno()) {
+    if (mysqli_errno($DB->getConnection())) {
         return mysqli_connect_error();
     } else {
         return $res;

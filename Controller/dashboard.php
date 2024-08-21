@@ -34,19 +34,19 @@ if (isset($_REQUEST["request"])) {
 
     $out;
     if ($_REQUEST["request"] == "empcount") {
-        $resTotEmp = Search("select count(u.uid) as totalemp from user u, emppost emp, position pos where emp.position_pid = pos.pid and u.emppost_id = emp.id and u.isactive='1' and u.uid !='2' and pos.pid like '" . $_REQUEST["dept_data"] . "'");
+        $resTotEmp = Search("select count(u.uid) as totalemp from user u, emppost emp, position pos where emp.position_pid = pos.pid and u.emppost_id = emp.id and u.isactive='1' and u.uid !='2' and u.dept_id like '" . $_REQUEST["dept_data"] . "'");
         if ($resultTotEmp = mysqli_fetch_assoc($resTotEmp)) {
 
             $TotEmp =  $resultTotEmp["totalemp"];
         }
 
-        $resTotAdmin = Search("select count(u.uid) as totaladm from user u, emppost emp, position pos where emp.position_pid = pos.pid and u.emppost_id = emp.id and u.isactive='1' and u.gender = '1' and u.uid !='2' and pos.pid like '" . $_REQUEST["dept_data"] . "'");
+        $resTotAdmin = Search("select count(u.uid) as totaladm from user u, emppost emp, position pos where emp.position_pid = pos.pid and u.emppost_id = emp.id and u.isactive='1' and u.gender = '1' and u.uid !='2' and u.dept_id like '" . $_REQUEST["dept_data"] . "'");
         if ($resultTotAdmin = mysqli_fetch_assoc($resTotAdmin)) {
 
             $TotAdmin =  $resultTotAdmin["totaladm"];
         }
 
-        $resTotMan = Search("select count(u.uid) as totalman from user u, emppost emp, position pos where emp.position_pid = pos.pid and u.emppost_id = emp.id and u.isactive='1' and u.gender = '2' and u.uid !='2' and pos.pid like '" . $_REQUEST["dept_data"] . "'");
+        $resTotMan = Search("select count(u.uid) as totalman from user u, emppost emp, position pos where emp.position_pid = pos.pid and u.emppost_id = emp.id and u.isactive='1' and u.gender = '2' and u.uid !='2' and u.dept_id like '" . $_REQUEST["dept_data"] . "'");
         if ($resultTotMan = mysqli_fetch_assoc($resTotMan)) {
 
             $TotMan =  $resultTotMan["totalman"];
@@ -56,7 +56,7 @@ if (isset($_REQUEST["request"])) {
         $MaleTbl = array();
 
 
-        $queryMale = "select u.uid from user u, emppost emp, position pos where emp.position_pid = pos.pid and u.emppost_id = emp.id and u.isactive='1' and u.uid!='2' and pos.pid like '" . $_REQUEST["dept_data"] . "' order by cast(u.epfno as unsigned) ASC";
+        $queryMale = "select u.uid from user u, emppost emp, position pos where emp.position_pid = pos.pid and u.emppost_id = emp.id and u.isactive='1' and u.uid!='2' and u.dept_id like '" . $_REQUEST["dept_data"] . "' order by cast(u.epfno as unsigned) ASC";
         $resMale = Search($queryMale);
         while ($resultMale = mysqli_fetch_assoc($resMale)) {
             $MaleTbl[] = $resultMale["uid"];
@@ -64,7 +64,7 @@ if (isset($_REQUEST["request"])) {
 
         $attM = array();
 
-        $query1 = "select att.User_uid as AtteMale from attendance att, user u, emppost emp, position pos where u.uid = att.User_uid and emp.position_pid = pos.pid and u.emppost_id = emp.id and att.date = '" . date("Y-m-d") . "' and pos.pid like '" . $_REQUEST["dept_data"] . "' group by att.User_uid";
+        $query1 = "select att.User_uid as AtteMale from attendance att, user u, emppost emp, position pos where u.uid = att.User_uid and emp.position_pid = pos.pid and u.emppost_id = emp.id and att.date = '" . date("Y-m-d") . "' and u.dept_id like '" . $_REQUEST["dept_data"] . "' group by att.User_uid";
         $Count_Male = 0;
         $res1 = Search($query1);
         while ($result1 = mysqli_fetch_assoc($res1)) {
@@ -98,7 +98,7 @@ if (isset($_REQUEST["request"])) {
         echo "<table class='table table-striped'><thead><tr><th>EPF No</th><th>Employee's Name</th><th>Calling Name</th><th>Date</th><th></th></tr></thead><tbody>";
         // $resBday = Search("select fname,epfno,mname,dob,gender from  user where isactive='1' and uid !='2' and MONTH(dob)='".$_REQUEST["Month_data"]."' ORDER BY CAST(epfno AS UNSIGNED ) ASC");
 
-        $resBday = Search("select u.fname,u.epfno,u.mname,u.dob,u.gender,u.jobcode from  user u,emppost emp,position pos where emp.position_pid = pos.pid and u.emppost_id = emp.id and isactive='1' and uid !='2' and MONTH(dob)='" . $_REQUEST["Month_data"] . "'and pos.pid like '" . $_REQUEST["dept_data"] . "' ORDER BY CAST(epfno AS UNSIGNED ) ASC");
+        $resBday = Search("select u.fname,u.epfno,u.mname,u.dob,u.gender,u.jobcode from  user u,emppost emp,position pos where emp.position_pid = pos.pid and u.emppost_id = emp.id and isactive='1' and uid !='2' and MONTH(dob)='" . $_REQUEST["Month_data"] . "'and u.dept_id like '" . $_REQUEST["dept_data"] . "' ORDER BY CAST(epfno AS UNSIGNED ) ASC");
 
         while ($resultBday = mysqli_fetch_assoc($resBday)) {
 
@@ -122,7 +122,7 @@ if (isset($_REQUEST["request"])) {
         $att = array();
         for ($i = 1; $i <= 12; $i++) {
 
-            $query1 = "select count(a.aid) as AtteOfMontg from attendance a,user u, emppost emp, position pos where u.uid = a.User_uid and emp.position_pid = pos.pid and u.emppost_id = emp.id and YEAR(a.date) = '" . $_REQUEST["Year_data"] . "' and MONTH(a.date) = '" . $i . "' and pos.pid like '" . $_REQUEST["dept"] . "'";
+            $query1 = "select count(a.aid) as AtteOfMontg from attendance a,user u, emppost emp, position pos where u.uid = a.User_uid and emp.position_pid = pos.pid and u.emppost_id = emp.id and YEAR(a.date) = '" . $_REQUEST["Year_data"] . "' and MONTH(a.date) = '" . $i . "' and u.dept_id like '" . $_REQUEST["dept"] . "'";
             $res1 = Search($query1);
             if ($result1 = mysqli_fetch_assoc($res1)) {
                 $allAtt = $result1["AtteOfMontg"];
@@ -143,7 +143,7 @@ if (isset($_REQUEST["request"])) {
 
         for ($i = 1; $i <= 31; $i++) {
 
-            $query1 = "select count(a.aid) as AtteOfMontg from attendance a,user u, emppost emp, position pos where a.User_uid = u.uid and emp.position_pid = pos.pid and u.emppost_id = emp.id and YEAR(a.date) = '" . $_REQUEST["Year_data"] . "' and MONTH(a.date) = '" . $_REQUEST["Month_data"] . "' and DAY(a.date) = '" . $i . "' and pos.pid like '" . $_REQUEST["dept"] . "' and a.late_att_min != 0 and u.gender = '1'";
+            $query1 = "select count(a.aid) as AtteOfMontg from attendance a,user u, emppost emp, position pos where a.User_uid = u.uid and emp.position_pid = pos.pid and u.emppost_id = emp.id and YEAR(a.date) = '" . $_REQUEST["Year_data"] . "' and MONTH(a.date) = '" . $_REQUEST["Month_data"] . "' and DAY(a.date) = '" . $i . "' and u.dept_id like '" . $_REQUEST["dept"] . "' and a.late_att_min != 0 and u.gender = '1'";
             $res1 = Search($query1);
             if ($result1 = mysqli_fetch_assoc($res1)) {
                 $allAttM = $result1["AtteOfMontg"];
@@ -151,7 +151,7 @@ if (isset($_REQUEST["request"])) {
                 $attM[] = $allAttM;
             }
 
-            $query2 = "select count(a.aid) as AtteOfMontg from attendance a,user u, emppost emp, position pos where a.User_uid = u.uid and emp.position_pid = pos.pid and u.emppost_id = emp.id and YEAR(a.date) = '" . $_REQUEST["Year_data"] . "' and MONTH(a.date) = '" . $_REQUEST["Month_data"] . "' and DAY(a.date) = '" . $i . "' and pos.pid like '" . $_REQUEST["dept"] . "' and a.late_att_min != 0 and u.gender = '2'";
+            $query2 = "select count(a.aid) as AtteOfMontg from attendance a,user u, emppost emp, position pos where a.User_uid = u.uid and emp.position_pid = pos.pid and u.emppost_id = emp.id and YEAR(a.date) = '" . $_REQUEST["Year_data"] . "' and MONTH(a.date) = '" . $_REQUEST["Month_data"] . "' and DAY(a.date) = '" . $i . "' and u.dept_id like '" . $_REQUEST["dept"] . "' and a.late_att_min != 0 and u.gender = '2'";
             $res2 = Search($query2);
             if ($result2 = mysqli_fetch_assoc($res2)) {
                 $allAttF = $result2["AtteOfMontg"];
@@ -194,7 +194,7 @@ if (isset($_REQUEST["request"])) {
 
         for ($i = 1; $i <= 31; $i++) {
 
-            $query1 = "select a.User_uid as AtteMale from attendance a,user u, emppost emp, position pos where a.User_uid = u.uid and emp.position_pid = pos.pid and u.emppost_id = emp.id and YEAR(a.date) = '" . $_REQUEST["Year_data"] . "' and MONTH(a.date) = '" . $_REQUEST["Month_data"] . "' and DAY(a.date) = '" . $i . "' and pos.pid like '" . $_REQUEST["dept"] . "' and u.gender = '1'";
+            $query1 = "select a.User_uid as AtteMale from attendance a,user u, emppost emp, position pos where a.User_uid = u.uid and emp.position_pid = pos.pid and u.emppost_id = emp.id and YEAR(a.date) = '" . $_REQUEST["Year_data"] . "' and MONTH(a.date) = '" . $_REQUEST["Month_data"] . "' and DAY(a.date) = '" . $i . "' and u.dept_id like '" . $_REQUEST["dept"] . "' and u.gender = '1'";
 
             $Count_Male = 0;
             $res1 = Search($query1);
@@ -214,7 +214,7 @@ if (isset($_REQUEST["request"])) {
 
 
 
-            $query2 = "select a.User_uid as AtteFemale from attendance a,user u, emppost emp, position pos where a.User_uid = u.uid and emp.position_pid = pos.pid and u.emppost_id = emp.id and YEAR(a.date) = '" . $_REQUEST["Year_data"] . "' and MONTH(a.date) = '" . $_REQUEST["Month_data"] . "' and DAY(a.date) = '" . $i . "' and pos.pid like '" . $_REQUEST["dept"] . "' and u.gender = '2'";
+            $query2 = "select a.User_uid as AtteFemale from attendance a,user u, emppost emp, position pos where a.User_uid = u.uid and emp.position_pid = pos.pid and u.emppost_id = emp.id and YEAR(a.date) = '" . $_REQUEST["Year_data"] . "' and MONTH(a.date) = '" . $_REQUEST["Month_data"] . "' and DAY(a.date) = '" . $i . "' and u.dept_id like '" . $_REQUEST["dept"] . "' and u.gender = '2'";
 
             $Count_Female = 0;
             $res2 = Search($query2);

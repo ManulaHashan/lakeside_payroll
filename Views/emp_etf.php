@@ -199,15 +199,15 @@ include '../DB/DB.php';
 
                             <table>
                                 <tr>
-                                    <td><b>Derana Medical Laboratory Testing Services (Pvt) Ltd.</b><br>
-                                        No. 553/A, Madiwela Road,<br>
-                                        Thalawathugoda.
+                                    <td><b>Lakeside Adventist Hospital</b><br>
+                                        40 Sangaraja Mawatha, <br>
+                                        Kandy.
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><b>ETF CONTRIBUTION - Month of <?php echo $_GET["month"]; ?> -
                                             <?php echo $_GET["year"]; ?></b><br>
-                                        <b>EPF Registartion NO - B/40401</b><br>
+                                        <b>EPF Registartion NO - 00000</b><br>
                                     </td>
                                 </tr>
                             </table>
@@ -227,58 +227,58 @@ include '../DB/DB.php';
                                     </thead>
                                     <tbody>
                                         <?php
-                    $totAdd = 0;
+                                        $totAdd = 0;
 
-                    $totCons = 0;
-                    $totEM = 0;
-                    $totEMPE = 0;
-                    $totEarn = 0;
-                    $tot_earn = 0;
-                    $epf8 = 0;
-                    $epf12 = 0;
+                                        $totCons = 0;
+                                        $totEM = 0;
+                                        $totEMPE = 0;
+                                        $totEarn = 0;
+                                        $tot_earn = 0;
+                                        $epf8 = 0;
+                                        $epf12 = 0;
 
-                    $employerNO = "123456";
+                                        $employerNO = "123456";
 
-                    $month = $_GET["month"];
-                    if (count($_GET["month"]) == 1) {
-                      $month = "0" . $month;
-                    }
+                                        $month = $_GET["month"];
+                                        if (count($_GET["month"]) == 1) {
+                                            $month = "0" . $month;
+                                        }
 
-                    $resalx = Search("select u.uid,u.fname as emp,u.nic,u.epfno from user u,salarycomplete sal where u.uid = sal.uid and u.isactive like '" . $_GET["emp_status"] . "' group by sal.uid order by cast(u.epfno as unsigned) ASC");
-                    while ($resultalx = mysqli_fetch_assoc($resalx)) {
+                                        $resalx = Search("select u.uid,u.fname as emp,u.nic,u.epfno from user u,salarycomplete sal where u.uid = sal.uid and u.isactive like '" . $_GET["emp_status"] . "' group by sal.uid order by cast(u.epfno as unsigned) ASC");
+                                        while ($resultalx = mysqli_fetch_assoc($resalx)) {
 
-                      echo "<tr>";
-                      echo "<td>" . $resultalx["emp"] . "</td>";
-                      echo "<td><center>" . $resultalx["nic"] . "<center></td>";
-                      echo "<td><center>" . $resultalx["epfno"] . "<center></td>";
+                                            echo "<tr>";
+                                            echo "<td>" . $resultalx["emp"] . "</td>";
+                                            echo "<td><center>" . $resultalx["nic"] . "<center></td>";
+                                            echo "<td><center>" . $resultalx["epfno"] . "<center></td>";
 
-                      $resalxr = Search("select a.* from salarycomplete a, user b where a.uid = '" . $resultalx["uid"] . "' and a.uid = b.uid and a.month = '" . $_GET["month"] . "' and a.year = '" . $_GET["year"] . "'");
+                                            $resalxr = Search("select a.* from salarycomplete a, user b where a.uid = '" . $resultalx["uid"] . "' and a.uid = b.uid and a.month = '" . $_GET["month"] . "' and a.year = '" . $_GET["year"] . "'");
 
-                      if ($resultalxr = mysqli_fetch_assoc($resalxr)) {
-                        $Emp8 = $resultalxr["etf3"];
-                        $Etot = $resultalxr["basic"] + $resultalxr["br1"] + $resultalxr["br2"] - $resultalxr["nopay"];
-                        echo "<td style='text-align: right'>" . number_format($Emp8, 2) . "</td>";
-                        echo "<td style='text-align: right'>" . number_format($Etot, 2) . "</td>";
-                      } else {
-                        $Emp8 = 0;
-                        $Etot = 0;
-                        echo "<td style='text-align: right'>0.00</td>";
-                        echo "<td style='text-align: right'>0.00</td>";
-                      }
+                                            if ($resultalxr = mysqli_fetch_assoc($resalxr)) {
+                                                $Emp8 = $resultalxr["etf3"];
+                                                $Etot = $resultalxr["basic"] + $resultalxr["br1"] + $resultalxr["br2"] - $resultalxr["nopay"];
+                                                echo "<td style='text-align: right'>" . number_format($Emp8, 2) . "</td>";
+                                                echo "<td style='text-align: right'>" . number_format($Etot, 2) . "</td>";
+                                            } else {
+                                                $Emp8 = 0;
+                                                $Etot = 0;
+                                                echo "<td style='text-align: right'>0.00</td>";
+                                                echo "<td style='text-align: right'>0.00</td>";
+                                            }
 
-                      $epf8 += $Emp8;
-                      $totEarn += $Etot;
+                                            $epf8 += $Emp8;
+                                            $totEarn += $Etot;
 
-                      echo "</tr>";
-                    }
+                                            echo "</tr>";
+                                        }
 
-                    echo "<tr style='border-top: 2px solid black;'>";
-                    echo "<td colspan='2'></td>";
-                    echo "<td style='text-align: right'><b>Total Amount</b></td>";
-                    echo "<td style='text-align: right'>" . number_format($epf8, 2) . "</td>";
-                    echo "<td style='text-align: right'>" . number_format($totEarn, 2) . "</td>";
-                    echo "</tr>";
-                    ?>
+                                        echo "<tr style='border-top: 2px solid black;'>";
+                                        echo "<td colspan='2'></td>";
+                                        echo "<td style='text-align: right'><b>Total Amount</b></td>";
+                                        echo "<td style='text-align: right'>" . number_format($epf8, 2) . "</td>";
+                                        echo "<td style='text-align: right'>" . number_format($totEarn, 2) . "</td>";
+                                        echo "</tr>";
+                                        ?>
 
 
                                     </tbody>
@@ -295,20 +295,20 @@ include '../DB/DB.php';
                                         <th>Total Earnings (Rs)</th>
                                     </tr>
                                     <?php
-                  echo "<tr>";
-                  echo "<td><b>TOTAL</b></td>";
-                  echo "<td style='text-align: right'>" . number_format($epf8, 2) . "</td>";
-                  echo "<td style='text-align: right'>" . number_format($totEarn, 2) . "</td>";
-                  echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td><b>TOTAL</b></td>";
+                                    echo "<td style='text-align: right'>" . number_format($epf8, 2) . "</td>";
+                                    echo "<td style='text-align: right'>" . number_format($totEarn, 2) . "</td>";
+                                    echo "</tr>";
 
-                  ?>
+                                    ?>
                                 </table>
                             </div>
                             </br>
                             <?php
 
-              // }
-              ?>
+                            // }
+                            ?>
 
 
 
@@ -326,13 +326,13 @@ include '../DB/DB.php';
     </div>
 
     <?php
-  if (isset($_REQUEST["submit"])) {
+    if (isset($_REQUEST["submit"])) {
 
-    echo "<input type='hidden' id='hmon' value='" . $_REQUEST["month"] . "'>";
-    echo "<input type='hidden' id='hyer' value='" . $_REQUEST["year"] . "'>";
-    echo "<input type='hidden' id='emp_stat' value='" . $_REQUEST["emp_status"] . "'>";
-  }
-  ?>
+        echo "<input type='hidden' id='hmon' value='" . $_REQUEST["month"] . "'>";
+        echo "<input type='hidden' id='hyer' value='" . $_REQUEST["year"] . "'>";
+        echo "<input type='hidden' id='emp_stat' value='" . $_REQUEST["emp_status"] . "'>";
+    }
+    ?>
 
     <div id="space"></div>
 
@@ -340,18 +340,18 @@ include '../DB/DB.php';
 
     <?php
 
-  function getSurName($name)
-  {
-    $initials = "";
-    $words = explode(' ', $name);
-    for ($i = 0; $i < count($words) - 1; $i++) {
-      $initials .= strtoupper(substr($words[$i], 0, 1)) . " ";
+    function getSurName($name)
+    {
+        $initials = "";
+        $words = explode(' ', $name);
+        for ($i = 0; $i < count($words) - 1; $i++) {
+            $initials .= strtoupper(substr($words[$i], 0, 1)) . " ";
+        }
+
+        return rtrim($initials);
     }
 
-    return rtrim($initials);
-  }
-
-  ?>
+    ?>
 
     </div>
     </div>

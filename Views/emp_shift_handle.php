@@ -353,7 +353,7 @@ include '../DB/DB.php';
                                                                 $query = "select jobcode,uid,fname,lname,epfno from user where isactive='1' and work_typ = '2' and uid != '2' order by length(jobcode),jobcode ASC";
                                                                 $res = Search($query);
                                                                 while ($result = mysqli_fetch_assoc($res)) {
-                                                                    ?>
+                                                                ?>
                                                                 <option value="<?php echo $result["uid"]; ?>">
                                                                     <?php echo $result["jobcode"]; ?>: &nbsp;
                                                                     <?php echo $result["fname"]; ?> </option>
@@ -376,10 +376,10 @@ include '../DB/DB.php';
                                                                 style="width: 200px; border: 1px solid black; height: 28px;">
                                                                 <option value="%"></option>
                                                                 <?php
-                                                                    $query = "select swtpsid,name from shift_working_time_profile_settings order by name ASC";
-                                                                    $res = Search($query);
-                                                                    while ($result = mysqli_fetch_assoc($res)) {
-                                                                        ?>
+                                                                $query = "select swtpsid,name from shift_working_time_profile_settings order by name ASC";
+                                                                $res = Search($query);
+                                                                while ($result = mysqli_fetch_assoc($res)) {
+                                                                ?>
                                                                 <option value="<?php echo $result["swtpsid"]; ?>">
                                                                     <?php echo $result["name"]; ?></option>
                                                                 <?php } ?>
@@ -449,37 +449,31 @@ include '../DB/DB.php';
                                                 <table class="table table-bordered">
                                                     <tr>
                                                         <thead>
-                                                            <th>Roster No</th>
+                                                            <th>Roster Code</th>
                                                             <th>Roster Name</th>
                                                             <th colspan="2">Time</th>
                                                         </thead>
                                                         <tbody>
                                                             <?php
-                                                        $query = "select swtpsid,name,sh_intime,sh_outtime from shift_working_time_profile_settings order by swtpsid ASC";
-                                                        $res = Search($query);
-                                                        while ($result = mysqli_fetch_assoc($res)) {
-                                                             
-                                                              if ($result["sh_intime"] == "" || $result["sh_intime"] == null) 
-                                                              {
-                                                                  $INTIME = "";
-                                                              }
-                                                              else
-                                                              {
-                                                                   $INTIME = date("H:i A", strtotime($result["sh_intime"]));
-                                                              }
+                                                            $query = "select swtpsid,name,sh_intime,rost_code,sh_outtime from shift_working_time_profile_settings order by swtpsid ASC";
+                                                            $res = Search($query);
+                                                            while ($result = mysqli_fetch_assoc($res)) {
 
-                                                              if ($result["sh_outtime"] == "" || $result["sh_outtime"] == null) 
-                                                              {
-                                                                  $OUTTIME = "";
-                                                              }
-                                                              else
-                                                              {
-                                                                  $OUTTIME = date("H:i A", strtotime($result["sh_outtime"]));
-                                                              }
+                                                                if ($result["sh_intime"] == "" || $result["sh_intime"] == null) {
+                                                                    $INTIME = "";
+                                                                } else {
+                                                                    $INTIME = date("H:i A", strtotime($result["sh_intime"]));
+                                                                }
+
+                                                                if ($result["sh_outtime"] == "" || $result["sh_outtime"] == null) {
+                                                                    $OUTTIME = "";
+                                                                } else {
+                                                                    $OUTTIME = date("H:i A", strtotime($result["sh_outtime"]));
+                                                                }
 
                                                             ?>
                                                             <tr>
-                                                                <td align="center"><?php echo $result["swtpsid"]; ?>
+                                                                <td align="center"><?php echo $result["rost_code"]; ?>
                                                                 </td>
                                                                 <td><?php echo $result["name"]; ?></td>
                                                                 <td colspan="2"><?php echo $INTIME; ?> -
@@ -513,10 +507,10 @@ include '../DB/DB.php';
                                         <select id="shname" name="shname" class="form-control" style="width: 200px;">
                                             <option value="%">All</option>
                                             <?php
-                                                    $query = "select swtpsid,name from shift_working_time_profile_settings order by name ASC";
-                                                    $res = Search($query);
-                                                    while ($result = mysqli_fetch_assoc($res)) {
-                                                        ?>
+                                            $query = "select swtpsid,name from shift_working_time_profile_settings order by name ASC";
+                                            $res = Search($query);
+                                            while ($result = mysqli_fetch_assoc($res)) {
+                                            ?>
                                             <option value="<?php echo $result["swtpsid"]; ?>">
                                                 <?php echo $result["name"]; ?></option>
                                             <?php } ?>
@@ -527,10 +521,10 @@ include '../DB/DB.php';
                                         <select id="empdata" name="empdata" class="form-control" style="width: 200px;">
                                             <option value="%">All</option>
                                             <?php
-                                                $query = "select jobcode,uid,fname,lname,epfno from user where isactive='1' and work_typ = '2' and uid != '2' order by length(jobcode),jobcode ASC";
-                                                $res = Search($query);
-                                                while ($result = mysqli_fetch_assoc($res)) {
-                                                    ?>
+                                            $query = "select jobcode,uid,fname,lname,epfno from user where isactive='1' and work_typ = '2' and uid != '2' order by length(jobcode),jobcode ASC";
+                                            $res = Search($query);
+                                            while ($result = mysqli_fetch_assoc($res)) {
+                                            ?>
                                             <option value="<?php echo $result["uid"]; ?>">
                                                 <?php echo $result["jobcode"]; ?>: &nbsp;
                                                 <?php echo $result["fname"]; ?> </option>
@@ -567,10 +561,10 @@ include '../DB/DB.php';
                                             style="width: 200px;">
                                             <option value="%"></option>
                                             <?php
-                                                    $query = "select swtpsid,name from shift_working_time_profile_settings order by name ASC";
-                                                    $res = Search($query);
-                                                    while ($result = mysqli_fetch_assoc($res)) {
-                                                        ?>
+                                            $query = "select swtpsid,name from shift_working_time_profile_settings order by name ASC";
+                                            $res = Search($query);
+                                            while ($result = mysqli_fetch_assoc($res)) {
+                                            ?>
                                             <option value="<?php echo $result["swtpsid"]; ?>">
                                                 <?php echo $result["name"]; ?></option>
                                             <?php } ?>

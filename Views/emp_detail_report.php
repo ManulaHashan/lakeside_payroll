@@ -128,10 +128,10 @@ include '../DB/DB.php';
                                                     style="width: 150px; height: 23px;">
                                                     <option value="%"></option>
                                                     <?php
-                          $query = "select uid,fname,lname,jobcode,epfno from user where isactive='1' and uid != '2' order by length(jobcode),jobcode ASC";
-                          $res = Search($query);
-                          while ($result = mysqli_fetch_assoc($res)) {
-                          ?>
+                                                    $query = "select uid,fname,lname,jobcode,epfno from user where isactive='1' and uid != '2' order by length(jobcode),jobcode ASC";
+                                                    $res = Search($query);
+                                                    while ($result = mysqli_fetch_assoc($res)) {
+                                                    ?>
                                                     <option value="<?php echo $result["uid"]; ?>">
                                                         <?php echo $result["jobcode"]; ?> : &nbsp;
                                                         <?php echo $result["fname"]; ?> </option>
@@ -145,11 +145,11 @@ include '../DB/DB.php';
                                                     style="width: 150px; height: 23px;">
                                                     <option value="%"></option>
                                                     <?php
-                          $query = "select pid,name from position order by pid";
-                          $res = Search($query);
-                          while ($result = mysqli_fetch_assoc($res)) {
-                          ?>
-                                                    <option value="<?php echo $result["pid"]; ?>">
+                                                    $query = "select did,name from emp_department order by did";
+                                                    $res = Search($query);
+                                                    while ($result = mysqli_fetch_assoc($res)) {
+                                                    ?>
+                                                    <option value="<?php echo $result["did"]; ?>">
                                                         <?php echo $result["name"]; ?> </option>
                                                     <?php } ?>
                                                 </select>
@@ -200,12 +200,12 @@ include '../DB/DB.php';
                             </br>
 
                             <?php
-              //       $resal = Search("select etid,name from employeetype");
-              // while ($resultal = mysqli_fetch_assoc($resal)) {
+                            //       $resal = Search("select etid,name from employeetype");
+                            // while ($resultal = mysqli_fetch_assoc($resal)) {
 
-              //  echo "Department : ".$resultal["name"]. "<br/>";
+                            //  echo "Department : ".$resultal["name"]. "<br/>";
 
-              ?>
+                            ?>
                             <br>
                             <br>
                             <div id="tdatax" style="overflow-x: scroll;">
@@ -227,97 +227,97 @@ include '../DB/DB.php';
                                             <th>Address</th>
                                             <th>Permanent Address</th>
                                             <th>Employee Type</th>
-                                            <th>Job Code</th>
+                                            <th>EMP No (Fingerprint)</th>
                                             <th>Department</th>
                                         </tr>
 
                                     </thead>
                                     <tbody>
                                         <?php
-                    $totAdd = 0;
+                                        $totAdd = 0;
 
-                    $totCons = 0;
-                    $totEM = 0;
-                    $totEMPE = 0;
-                    $totEarn = 0;
-                    $tot_earn = 0;
-                    $epf8 = 0;
-                    $epf12 = 0;
+                                        $totCons = 0;
+                                        $totEM = 0;
+                                        $totEMPE = 0;
+                                        $totEarn = 0;
+                                        $tot_earn = 0;
+                                        $epf8 = 0;
+                                        $epf12 = 0;
 
-                    $employerNO = "123456";
+                                        $employerNO = "123456";
 
-                    if ($_GET["pmethod"] == "0") {
-                      $resalx = Search("select a.uid,a.fname as emp,a.mname,a.nic,a.epfno,a.tpno, a.lpno, a.dob, a.email, a.school, a.registerdDate, a.address, a.permanentAddress,a.EmployeeType_etid, a.jobcode,a.emppost_id,d.pid from user a, emppost c, position d where a.uid like '" . $_GET["employee"] . "' and c.position_pid = d.pid and a.emppost_id = c.id and d.pid like '" . $_GET["dept"] . "'  and  a.bankno = '' and a.isactive='" . $_GET["stat"] . "' and a.uid != '2' order by cast(a.epfno as unsigned) ASC");
-                    } elseif ($_GET["pmethod"] == "1") {
-                      $resalx = Search("select a.uid,a.fname as emp,a.mname,a.nic,a.epfno,a.tpno, a.lpno, a.dob, a.email, a.school, a.registerdDate, a.address, a.permanentAddress,a.EmployeeType_etid, a.jobcode,a.emppost_id,d.pid from user a, emppost c, position d where a.uid like '" . $_GET["employee"] . "' and c.position_pid = d.pid and a.emppost_id = c.id and d.pid like '" . $_GET["dept"] . "'  and  a.bankno != '' and a.isactive='" . $_GET["stat"] . "' and a.uid != '2' order by cast(a.epfno as unsigned) ASC");
-                    } else {
-                      $resalx = Search("select a.uid,a.fname as emp,a.mname,a.nic,a.epfno,a.tpno, a.lpno, a.dob, a.email, a.school, a.registerdDate, a.address, a.permanentAddress,a.EmployeeType_etid, a.jobcode,a.emppost_id,d.pid from user a, emppost c, position d where a.uid like '" . $_GET["employee"] . "' and c.position_pid = d.pid and a.emppost_id = c.id and d.pid like '" . $_GET["dept"] . "'  and  a.bankno like '%' and a.isactive='" . $_GET["stat"] . "' and a.uid != '2' order by cast(a.epfno as unsigned) ASC");
-                    }
-
-
+                                        if ($_GET["pmethod"] == "0") {
+                                            $resalx = Search("select a.uid,a.fname as emp,a.mname,a.nic,a.epfno,a.tpno, a.lpno, a.dob, a.email, a.school, a.registerdDate, a.address, a.permanentAddress,a.EmployeeType_etid, a.jobcode,a.emppost_id,d.pid,a.dept_id from user a, emppost c, position d where a.uid like '" . $_GET["employee"] . "' and c.position_pid = d.pid and a.emppost_id = c.id and a.dept_id like '" . $_GET["dept"] . "'  and  a.bankno = '' and a.isactive='" . $_GET["stat"] . "' and a.uid != '2' order by cast(a.epfno as unsigned) ASC");
+                                        } elseif ($_GET["pmethod"] == "1") {
+                                            $resalx = Search("select a.uid,a.fname as emp,a.mname,a.nic,a.epfno,a.tpno, a.lpno, a.dob, a.email, a.school, a.registerdDate, a.address, a.permanentAddress,a.EmployeeType_etid, a.jobcode,a.emppost_id,d.pid,a.dept_id from user a, emppost c, position d where a.uid like '" . $_GET["employee"] . "' and c.position_pid = d.pid and a.emppost_id = c.id and a.dept_id like '" . $_GET["dept"] . "'  and  a.bankno != '' and a.isactive='" . $_GET["stat"] . "' and a.uid != '2' order by cast(a.epfno as unsigned) ASC");
+                                        } else {
+                                            $resalx = Search("select a.uid,a.fname as emp,a.mname,a.nic,a.epfno,a.tpno, a.lpno, a.dob, a.email, a.school, a.registerdDate, a.address, a.permanentAddress,a.EmployeeType_etid, a.jobcode,a.emppost_id,d.pid,a.dept_id from user a, emppost c, position d where a.uid like '" . $_GET["employee"] . "' and c.position_pid = d.pid and a.emppost_id = c.id and a.dept_id like '" . $_GET["dept"] . "'  and  a.bankno like '%' and a.isactive='" . $_GET["stat"] . "' and a.uid != '2' order by cast(a.epfno as unsigned) ASC");
+                                        }
 
 
 
-                    while ($resultalx = mysqli_fetch_assoc($resalx)) {
-
-                      echo "<tr>";
-                      echo "<td><center>" . $resultalx["epfno"] . "</center></td>";
-                      echo "<td>" . $resultalx["emp"] . "</td>";
-                      echo "<td>" . $resultalx["mname"] . "</td>";
-                      echo "<td><center>" . $resultalx["nic"] . "</center></td>";
-                      echo "<td><center>" . $resultalx["tpno"] . "</center></td>";
-                      echo "<td><center>" . $resultalx["lpno"] . "</center></td>";
-                      echo "<td><center>" . $resultalx["dob"] . "</center></td>";
-                      echo "<td>" . $resultalx["email"] . "</td>";
-                      echo "<td>" . $resultalx["school"] . "</td>";
-                      echo "<td><center>" . $resultalx["registerdDate"] . "</center></td>";
-
-                      $resalAdd = Search("select address as Address from address where aid='" . $resultalx["address"] . "'");
-
-                      if ($resultalAdd = mysqli_fetch_assoc($resalAdd)) {
-
-                        echo "<td>" . $resultalAdd["Address"] . "</td>";
-                      } else {
-                        echo "<td></td>";
-                      }
-
-                      $resalxPerAdd = Search("select address as permenent from address where aid='" . $resultalx["permanentAddress"] . "'");
-
-                      if ($resultalPerAdd = mysqli_fetch_assoc($resalxPerAdd)) {
-
-                        echo "<td>" . $resultalPerAdd["permenent"] . "</td>";
-                      } else {
-                        echo "<td></td>";
-                      }
-
-                      $resalxrEtype = Search("select name as emptype from employeetype where etid='" . $resultalx["EmployeeType_etid"] . "'");
-
-                      if ($resultalxrEtype = mysqli_fetch_assoc($resalxrEtype)) {
-
-                        echo "<td>" . $resultalxrEtype["emptype"] . "</td>";
-                      } else {
-                        echo "<td></td>";
-                      }
 
 
-                      echo "<td><center>" . $resultalx["jobcode"] . "</center></td>";
+                                        while ($resultalx = mysqli_fetch_assoc($resalx)) {
+
+                                            echo "<tr>";
+                                            echo "<td><center>" . $resultalx["epfno"] . "</center></td>";
+                                            echo "<td>" . $resultalx["emp"] . "</td>";
+                                            echo "<td>" . $resultalx["mname"] . "</td>";
+                                            echo "<td><center>" . $resultalx["nic"] . "</center></td>";
+                                            echo "<td><center>" . $resultalx["tpno"] . "</center></td>";
+                                            echo "<td><center>" . $resultalx["lpno"] . "</center></td>";
+                                            echo "<td><center>" . $resultalx["dob"] . "</center></td>";
+                                            echo "<td>" . $resultalx["email"] . "</td>";
+                                            echo "<td>" . $resultalx["school"] . "</td>";
+                                            echo "<td><center>" . $resultalx["registerdDate"] . "</center></td>";
+
+                                            $resalAdd = Search("select address as Address from address where aid='" . $resultalx["address"] . "'");
+
+                                            if ($resultalAdd = mysqli_fetch_assoc($resalAdd)) {
+
+                                                echo "<td>" . $resultalAdd["Address"] . "</td>";
+                                            } else {
+                                                echo "<td></td>";
+                                            }
+
+                                            $resalxPerAdd = Search("select address as permenent from address where aid='" . $resultalx["permanentAddress"] . "'");
+
+                                            if ($resultalPerAdd = mysqli_fetch_assoc($resalxPerAdd)) {
+
+                                                echo "<td>" . $resultalPerAdd["permenent"] . "</td>";
+                                            } else {
+                                                echo "<td></td>";
+                                            }
+
+                                            $resalxrEtype = Search("select name as emptype from employeetype where etid='" . $resultalx["EmployeeType_etid"] . "'");
+
+                                            if ($resultalxrEtype = mysqli_fetch_assoc($resalxrEtype)) {
+
+                                                echo "<td>" . $resultalxrEtype["emptype"] . "</td>";
+                                            } else {
+                                                echo "<td></td>";
+                                            }
 
 
-                      $resalxr = Search("select name as postname from position where pid='" . $resultalx["pid"] . "'");
-
-                      if ($resultalxr = mysqli_fetch_assoc($resalxr)) {
-
-                        echo "<td>" . $resultalxr["postname"] . "</td>";
-                      } else {
-                        echo "<td></td>";
-                      }
+                                            echo "<td><center>" . $resultalx["jobcode"] . "</center></td>";
 
 
-                      echo "</tr>";
-                    }
+                                            $resalxr = Search("select name as department from emp_department where did='" . $resultalx["dept_id"] . "'");
+
+                                            if ($resultalxr = mysqli_fetch_assoc($resalxr)) {
+
+                                                echo "<td>" . $resultalxr["department"] . "</td>";
+                                            } else {
+                                                echo "<td></td>";
+                                            }
 
 
-                    ?>
+                                            echo "</tr>";
+                                        }
+
+
+                                        ?>
 
 
                                     </tbody>
@@ -326,8 +326,8 @@ include '../DB/DB.php';
                             </br>
                             <?php
 
-              // }
-              ?>
+                            // }
+                            ?>
 
 
 
@@ -345,14 +345,14 @@ include '../DB/DB.php';
     </div>
 
     <?php
-  if (isset($_REQUEST["submit"])) {
+    if (isset($_REQUEST["submit"])) {
 
-    echo "<input type='hidden' id='user' value='" . $_REQUEST["employee"] . "'>";
-    echo "<input type='hidden' id='depart' value='" . $_REQUEST["dept"] . "'>";
-    echo "<input type='hidden' id='pmeth' value='" . $_REQUEST["pmethod"] . "'>";
-    echo "<input type='hidden' id='pstat' value='" . $_REQUEST["stat"] . "'>";
-  }
-  ?>
+        echo "<input type='hidden' id='user' value='" . $_REQUEST["employee"] . "'>";
+        echo "<input type='hidden' id='depart' value='" . $_REQUEST["dept"] . "'>";
+        echo "<input type='hidden' id='pmeth' value='" . $_REQUEST["pmethod"] . "'>";
+        echo "<input type='hidden' id='pstat' value='" . $_REQUEST["stat"] . "'>";
+    }
+    ?>
 
     <div id="space"></div>
 
@@ -360,18 +360,18 @@ include '../DB/DB.php';
 
     <?php
 
-  function getSurName($name)
-  {
-    $initials = "";
-    $words = explode(' ', $name);
-    for ($i = 0; $i < count($words) - 1; $i++) {
-      $initials .= strtoupper(substr($words[$i], 0, 1)) . " ";
+    function getSurName($name)
+    {
+        $initials = "";
+        $words = explode(' ', $name);
+        for ($i = 0; $i < count($words) - 1; $i++) {
+            $initials .= strtoupper(substr($words[$i], 0, 1)) . " ";
+        }
+
+        return rtrim($initials);
     }
 
-    return rtrim($initials);
-  }
-
-  ?>
+    ?>
 
     </div>
     </div>

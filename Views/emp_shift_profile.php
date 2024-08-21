@@ -137,7 +137,8 @@ include '../DB/DB.php';
                 halfEIntime + "&halfEOuttime=" + halfEOuttime + "&shortMIntime=" + shortMIntime + "&shortMOuttime=" +
                 shortMOuttime + "&shortEIntime=" + shortEIntime + "&shortEOuttime=" + shortEOuttime + "&wrkLate=" +
                 wrkLate + "&halfMLate=" + halfMLate + "&halfELate=" + halfELate + "&shrtMLate=" + shrtMLate +
-                "&shrtELate=" + shrtELate + "&wrkname=" + name + "&SWTID=" + SWTID + "&clrcode=" + clrCode;
+                "&shrtELate=" + shrtELate + "&wrkname=" + name + "&wrkCode=" + code + "&SWTID=" + SWTID + "&clrcode=" +
+                clrCode;
 
             $.ajax({
                 type: 'POST',
@@ -288,14 +289,15 @@ include '../DB/DB.php';
                         </tr>
                         <tr>
                             <td height="35px;" width="200px;">
-                                <p class="form-label">Roster Code</p>
-                            </td>
-                            <td><input id="wrkCode" type="text" name="wrkCode" class="input-text" style="width: 150px">
-                            </td>
-                            <td height="35px;" width="200px;">
                                 <p class="form-label">Roster Name</p>
                             </td>
                             <td><input id="wrkName" type="text" name="wrkName" class="input-text" style="width: 150px">
+                            </td>
+
+                            <td height="35px;" width="200px;">
+                                <p class="form-label">Roster Code</p>
+                            </td>
+                            <td><input id="wrkCode" type="text" name="wrkCode" class="input-text" style="width: 150px">
                             </td>
                             <td height="35px;" width="200px;">
                                 <p class="form-label">Working In Time</p>

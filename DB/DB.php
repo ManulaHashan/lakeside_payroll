@@ -2,7 +2,6 @@
 
 class Database
 {
-
     private static $Connection;
 
     function getConnection()

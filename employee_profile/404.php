@@ -1,19 +1,23 @@
 <?php
-    session_start(); 
+error_reporting(0);
+session_start();
 ?>
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Page Not Found</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
     <style>
-        *, body {
+        *,
+        body {
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
             -moz-osx-font-smoothing: grayscale;
         }
+
         * {
             line-height: 1.2;
             margin: 0;
@@ -28,7 +32,18 @@
             width: 100%;
         }
 
-        .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        .h1,
+        .h2,
+        .h3,
+        .h4,
+        .h5,
+        .h6,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'Nunito Sans', sans-serif;
         }
 
@@ -46,6 +61,7 @@
             margin-bottom: 10px;
             letter-spacing: 2px;
         }
+
         h4 {
             color: #4a5361;
             text-transform: capitalize;
@@ -56,11 +72,12 @@
             margin: 0 auto;
             max-width: 790px;
             margin-top: 20px;
-            color: #666 ;
+            color: #666;
             margin-bottom: 10px;
             font-size: 15px;
             line-height: 20px;
         }
+
         a {
             display: inline-block;
             padding: 8px 15px;
@@ -73,7 +90,8 @@
 
         @media only screen and (max-width: 280px) {
 
-            body, p {
+            body,
+            p {
                 width: 95%;
             }
 
@@ -83,14 +101,15 @@
             }
 
         }
-
     </style>
 </head>
-<body>  
+
+<body>
     <h1>404</h1>
     <h4>Page Not Found</h4>
-    <p>It's looking like you may have taken a wrong turn. Don't worry... it happens to the best of us. Here's a little tip that might help you get back on track.</p>
+    <p>It's looking like you may have taken a wrong turn. Don't worry... it happens to the best of us. Here's a little
+        tip that might help you get back on track.</p>
     <a href="index.php">Return to Home</a>
 </body>
-</html>
 
+</html>

@@ -8,6 +8,7 @@ $DB = new Database();
 ?>
 
 <html>
+
 <head>
     <title>Bulk Salary Slip | Apex Payroll</title>
     <!-- Favicons -->
@@ -19,89 +20,91 @@ $DB = new Database();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <style>
-        .Report_Headerx{
-            border-radius: 10px; 
-            width: 250px;
-            display: block;
-            background-color: #cc0033;
-            color: white;
-            padding-left: 20px;
-            padding-right: 20px; 
-            padding-top: 5px;
-            padding-bottom: 5px;     
-            font-size: 18px; 
-            font-family: "Times New Roman", Times, serif;
-            font-weight: bolder;
-        } 
+    .Report_Headerx {
+        border-radius: 10px;
+        width: 250px;
+        display: block;
+        background-color: #cc0033;
+        color: white;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 18px;
+        font-family: "Times New Roman", Times, serif;
+        font-weight: bolder;
+    }
 
-        .borderbtm{
-            border-bottom-color: #000; 
-            border-bottom-style: solid; 
-            border-bottom-width: 1px;
-        }
+    .borderbtm {
+        border-bottom-color: #000;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+    }
 
-        .borderbtmAsh{
-            border-bottom-color: #999999; 
-            border-bottom-style: solid; 
-            border-bottom-width: 1px;
-        }
+    .borderbtmAsh {
+        border-bottom-color: #999999;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+    }
     </style>
 
     <style>
     .grid-container {
-      display: inline-grid;
-      grid-template-columns: auto auto auto;
-      padding: 20px;
-      width: 400px;
-      
+        display: inline-grid;
+        grid-template-columns: auto auto auto;
+        padding: 20px;
+        width: 400px;
+
     }
+
     .grid-item {
-      border: 1px solid rgba(0, 0, 0, 0.8);
-      padding: 10px;
-      font-size: 18px;
-      width: 400px;
-      height: 1400px;
-      
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        padding: 10px;
+        font-size: 18px;
+        width: 400px;
+        height: 1400px;
+
     }
     </style>
 
     <script type="text/javascript">
+    function exportToExcel() {
+        var htmls = "";
+        var uri = 'data:application/vnd.ms-excel;base64,';
+        var template =
+            '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>';
+        var base64 = function(s) {
+            return window.btoa(unescape(encodeURIComponent(s)))
+        };
 
-        function exportToExcel(){
-                    var htmls = "";
-                    var uri = 'data:application/vnd.ms-excel;base64,';
-                    var template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'; 
-                    var base64 = function(s) {
-                        return window.btoa(unescape(encodeURIComponent(s)))
-                    };
+        var format = function(s, c) {
+            return s.replace(/{(\w+)}/g, function(m, p) {
+                return c[p];
+            })
+        };
 
-                    var format = function(s, c) {
-                        return s.replace(/{(\w+)}/g, function(m, p) {
-                            return c[p];
-                        })
-                    };
+        htmls = document.getElementById("Bulk_Data").innerHTML;
 
-                    htmls = document.getElementById("Bulk_Data").innerHTML;
-
-                    var ctx = {
-                        worksheet : 'Worksheet',
-                        table : htmls
-                    }
-
-
-                    var link = document.createElement("a");
-                    link.download = "bulk_slip_details.xls";
-                    link.href = uri + base64(format(template, ctx));
-                    link.click();
+        var ctx = {
+            worksheet: 'Worksheet',
+            table: htmls
         }
+
+
+        var link = document.createElement("a");
+        link.download = "bulk_slip_details.xls";
+        link.href = uri + base64(format(template, ctx));
+        link.click();
+    }
     </script>
 
 </head>
+
 <body id="Bulk_Data">
-    
+
     <button class="btn btn-success" onclick="exportToExcel()">Export Excel</button>
-     
-     <?php
+
+    <?php
     
     if (isset($_GET["Month"])) {
 
@@ -112,10 +115,10 @@ $DB = new Database();
             $resAll = Search($queryAll);
             while ($resultAll = mysqli_fetch_assoc($resAll)) {?>
 
-                <div class="grid-container">
-                 <div class="grid-item">  
+    <div class="grid-container">
+        <div class="grid-item">
 
-                    <center> <?php
+            <center> <?php
                 
                         $res = Search("select * from salarycomplete where id = '" . $resultAll["id"] . "'");
                         if ($result = mysqli_fetch_assoc($res)) {
@@ -361,102 +364,158 @@ $DB = new Database();
                     
                     ?>
 
-                    <h2>- Lakeside Hospital - Kandy. -</h2>
+                <h2>- Lakeside Adventist Hospital - Kandy. -</h2>
 
-                    <h4><u>Salary Pay Slip</u></h4>
+                <h4><u>Salary Pay Slip</u></h4>
 
-                    <center><table><tr><td>Year : <?php echo $year;?><td>&nbsp;</td><td>Month :  <?php echo date("F", mktime(0, 0, 0, $month, 10));?></td></td></tr></table></center>
-                    <hr/></br>
-
-                    <table width="80%" style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-family: 'Times New Roman', Times, serif; font-size: 14px;">
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">Employee Name</td>
-                            <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">: <?php echo $userName; ?></td>     
-                        </tr>
-
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">Employee No</td>
-                            <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">: <?php echo $userNo; ?></td>     
-                        </tr>
-
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">E.P.F. No</td>
-                            <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">: <?php echo $userEpfNo; ?></td>
-                        </tr>
-
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">Employee Designation</td>
-                            <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">: <?php echo $userDesignation; ?></td>    
-                        </tr>
-
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">Department</td>
-                            <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">: <?php echo $userDepartment; ?></td>    
-                        </tr>
-
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">Branch</td>
-                            <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">: <?php echo $userBranch; ?></td>    
-                        </tr>
-
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">NIC No</td>
-                            <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">: <?php echo $userNIC; ?></td>    
-                        </tr>
-
-                        <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
+                <center>
+                    <table>
+                        <tr>
+                            <td>Year : <?php echo $year;?>
                             <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td>Month : <?php echo date("F", mktime(0, 0, 0, $month, 10));?></td>
+                            </td>
                         </tr>
+                    </table>
+                </center>
+                <hr /></br>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">Description</td>
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">Hours</td> 
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">Amount (LKR)</td>    
-                        </tr>
+                <table width="80%"
+                    style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-family: 'Times New Roman', Times, serif; font-size: 14px;">
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            Employee Name</td>
+                        <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">:
+                            <?php echo $userName; ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Total OT Hours </td>
-                            <td align='center' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"> <?php echo $OT_hours; ?></td>
-                            <td align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"> <?php echo number_format($Ot_allow,2); ?></td>  
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            Employee No</td>
+                        <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">:
+                            <?php echo $userNo; ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Basic Salary Rs.</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo number_format($Basic_sal,2); ?></td> 
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            E.P.F. No</td>
+                        <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">:
+                            <?php echo $userEpfNo; ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">Basic Salary For EPF Rs.</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;"><?php echo number_format($Basic_sal_for_epf,2); ?></td> 
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            Employee Designation</td>
+                        <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">:
+                            <?php echo $userDesignation; ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            Department</td>
+                        <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">:
+                            <?php echo $userDepartment; ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse; font-weight: bold;">
-                            <td align="left" colspan='2'><u>Allowances</u></td>
-                            <td>&nbsp;</td>
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            Branch</td>
+                        <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">:
+                            <?php echo $userBranch; ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Fixed Allowance Rs.</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo number_format($Attendence_allow,2); ?></td>  
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            NIC No</td>
+                        <td colspan='2' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">:
+                            <?php echo $userNIC; ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Vehicle Allowance Rs. </td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo number_format($Travelling_allow,2); ?></td> 
-                        </tr>
+                    <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Other Allowances Rs. </td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo number_format($Other_allow,2); ?></td> 
-                        </tr>
-                        
-                        <?php
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            Description</td>
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            Hours</td>
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            Amount (LKR)</td>
+                    </tr>
+
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Total OT Hours
+                        </td>
+                        <td align='center' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo $OT_hours; ?></td>
+                        <td align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($Ot_allow,2); ?></td>
+                    </tr>
+
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Basic Salary Rs.
+                        </td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($Basic_sal,2); ?></td>
+                    </tr>
+
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            Basic Salary For EPF Rs.</td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            <?php echo number_format($Basic_sal_for_epf,2); ?></td>
+                    </tr>
+
+                    <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+
+                    <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                        <td align="left" colspan='2'><u>Allowances</u></td>
+                        <td>&nbsp;</td>
+                    </tr>
+
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Fixed Allowance
+                            Rs.</td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($Attendence_allow,2); ?></td>
+                    </tr>
+
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Vehicle Allowance
+                            Rs. </td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($Travelling_allow,2); ?></td>
+                    </tr>
+
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Other Allowances
+                            Rs. </td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($Other_allow,2); ?></td>
+                    </tr>
+
+                    <?php
                         $TotAllow = 0;
                         $resAllow = Search("select a.amount, b.name,b.alwid from user_has_allowances a, allowances b where a.alwid = b.alwid and a.uid = '".$USER."' and b.name !='Attendance Allowance' and b.name !='Travelling Allowance' and b.name !='Other Allowances' and b.name !='Fixed Allowance' and b.name != 'Vehicle Allowance' and b.name !='Budgetary Relief Allowance 1' and b.name !='New Budgetary Relief Allowance ' order by b.alwid");
                         while ($resultAllow = mysqli_fetch_assoc($resAllow)) {
@@ -464,13 +523,16 @@ $DB = new Database();
                             $TotAllow += $resultAllow["amount"]; 
              
                             ?>
-                                <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
-                                <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo $resultAllow["name"]; ?></td>
-                                <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo number_format($resultAllow["amount"],2); ?></td>
-                                </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo $resultAllow["name"]; ?></td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($resultAllow["amount"],2); ?></td>
+                    </tr>
 
 
-                            <?php
+                    <?php
                         }
 
                         $Tot_Gross = $Basic_sal_for_epf + $Attendence_allow + $Travelling_allow + $Ot_allow + $Other_allow + $TotAllow;
@@ -480,111 +542,151 @@ $DB = new Database();
                         $Total_Net_amount = $Tot_Gross - $Tot_Deduction;
 
                         ?>
-                        
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">Gross Salary Rs.</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;"><?php echo number_format($Tot_Gross,2); ?></td>    
-                        </tr>
 
-                        <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse; font-weight: bold;">
-                            <td align="left" colspan='2'><u>Deductions</u></td>
-                            <td>&nbsp;</td>
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            Gross Salary Rs.</td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            <?php echo number_format($Tot_Gross,2); ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">EPF Employee (8%) Rs.</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo number_format($EPF8,2); ?></td>
-                        </tr>
+                    <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                        <td align="left" colspan='2'><u>Deductions</u></td>
+                        <td>&nbsp;</td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Other Deduction Rs.</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo number_format($OtherDedS,2); ?></td>     
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">EPF Employee (8%)
+                            Rs.</td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($EPF8,2); ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Loan Repayment Rs.</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo number_format($loan,2); ?></td>  
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Other Deduction
+                            Rs.</td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($OtherDedS,2); ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Salary Advance Rs.</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo number_format($salary_advance,2); ?></td> 
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Loan Repayment Rs.
+                        </td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($loan,2); ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Late Att. Deduction</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo number_format($Late_ded,2); ?></td> 
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Salary Advance Rs.
+                        </td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($salary_advance,2); ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">PAYEE Tax Amount</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo number_format($Payee_Tax,2); ?></td> 
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">Late Att.
+                            Deduction</td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($Late_ded,2); ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">Total Deduction Rs.</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;"><?php echo number_format($Tot_Deduction,2); ?></td>    
-                        </tr>
-                        <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">Total Net Salary Rs.</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;"><?php echo number_format($Total_Net_amount,2); ?></td>    
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">PAYEE Tax Amount
+                        </td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($Payee_Tax,2); ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse; font-weight: bold;">
-                            <td align="left" colspan='2'><u>Employer's Contribution</u></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">  
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">EPF Employer (12%) Rs.</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo number_format($EPF12,2); ?></td>     
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            Total Deduction Rs.</td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            <?php echo number_format($Tot_Deduction,2); ?></td>
+                    </tr>
+                    <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            Total Net Salary Rs.</td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            <?php echo number_format($Total_Net_amount,2); ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">ETF Employer (3%) Rs.</td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse;"><?php echo number_format($ETF3,2); ?></td> 
-                        </tr>
+                    <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                        <td align="left" colspan='2'><u>Employer's Contribution</u></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">EPF Employer (12%)
+                            Rs.</td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($EPF12,2); ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td style="border: 1px solid black; padding: 5px; border-collapse: collapse;">ETF Employer (3%)
+                            Rs.</td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                            <?php echo number_format($ETF3,2); ?></td>
+                    </tr>
 
-                        <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
-                            <td style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;"><?php echo $userBankAndAccNo; ?></td>
-                            <td colspan='2' align='right' style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;"><?php echo number_format($Total_Net_amount,2); ?></td> 
-                        </tr>
+                    <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
 
-                        <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
-                            <td align="left">Date : <?php echo $Sal_date; ?></td>
-                            <td align="right" colspan='2'>Signature : ..............</td>
-                        </tr>
-                    </table>
-                </center> 
-             </div>
-            </div>
+                    <tr style="border: 1px solid black; padding: 5px; border-collapse: collapse;">
+                        <td
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            <?php echo $userBankAndAccNo; ?></td>
+                        <td colspan='2' align='right'
+                            style="border: 1px solid black; padding: 5px; border-collapse: collapse; font-weight: bold;">
+                            <?php echo number_format($Total_Net_amount,2); ?></td>
+                    </tr>
 
-                <?php
+                    <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr style="border: 1px solid white; padding: 5px; border-collapse: collapse;">
+                        <td align="left">Date : <?php echo $Sal_date; ?></td>
+                        <td align="right" colspan='2'>Signature : ..............</td>
+                    </tr>
+                </table>
+            </center>
+        </div>
+    </div>
+
+    <?php
                 
 
             }     
@@ -594,4 +696,5 @@ $DB = new Database();
     ?>
 
 </body>
+
 </html>
