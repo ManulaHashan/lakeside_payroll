@@ -113,8 +113,8 @@ if (isset($_POST["submit"])) {
             }
 
             //insert User
-            $insertQuery = "insert into user(fname,mname,lname,nic,tpno,lpno,dob,email,school,gender,presentSalary,expectedSalery,registerdDate,address,permanentAddress,MaritalStatus_idMaritalStatus,EmployeeType_etid,imageURL,isactive,jobcode,emppost_id,epfno, bankno, bank, payeetax,skill_descrip,emp_act,prob_end_date,auth_person_id,sec_auth_person_id,work_typ,epf_entitle_date,dept_id,first_year_leave_end_date,priv_typ)"
-                . " values('" . $_POST["fn"] . "','" . $_POST["cn"] . "','" . $_POST["full_n"] . "','" . $_POST["nic"] . "','" . $_POST["tpno"] . "','" . $_POST["lpno"] . "','" . $DOBDate . "','" . $_POST["email"] . "','" . $_POST["school"] . "','" . $_POST["gender"] . "','" . $customSal . "','0','" . $registeredDate . "','" . $aid . "','" . $paid . "','" . $_POST["mstatus"] . "','" . $_POST["etype"] . "','" . $imageURL . "','1','" . $_POST["jc"] . "','" . $emp_post . "','" . $_POST["epf"] . "','" . $_POST["bno"] . "','" . $_POST["bbr"] . "','" . $_POST["ptax"] . "','','" . $_POST["empact"] . "','" . $probEndDate . "','" . $_POST["authperson"] . "','" . $_POST["sec_authperson"] . "','" . $_POST["wrk_typ"] . "','" . $epfEntitleDate . "','" . $_POST["emp_dip"] . "','" . $futureDate . "','" . $_POST["privtype"] . "')";
+            $insertQuery = "insert into user(fname,mname,lname,nic,tpno,lpno,dob,email,school,gender,presentSalary,expectedSalery,registerdDate,address,permanentAddress,MaritalStatus_idMaritalStatus,EmployeeType_etid,imageURL,isactive,jobcode,emppost_id,epfno, bankno, bank, payeetax,skill_descrip,emp_act,prob_end_date,auth_person_id,sec_auth_person_id,work_typ,epf_entitle_date,dept_id,first_year_leave_end_date,priv_typ,opd_claim_value,ipd_claim_value)"
+                . " values('" . $_POST["fn"] . "','" . $_POST["cn"] . "','" . $_POST["full_n"] . "','" . $_POST["nic"] . "','" . $_POST["tpno"] . "','" . $_POST["lpno"] . "','" . $DOBDate . "','" . $_POST["email"] . "','" . $_POST["school"] . "','" . $_POST["gender"] . "','" . $customSal . "','0','" . $registeredDate . "','" . $aid . "','" . $paid . "','" . $_POST["mstatus"] . "','" . $_POST["etype"] . "','" . $imageURL . "','1','" . $_POST["jc"] . "','" . $emp_post . "','" . $_POST["epf"] . "','" . $_POST["bno"] . "','" . $_POST["bbr"] . "','" . $_POST["ptax"] . "','','" . $_POST["empact"] . "','" . $probEndDate . "','" . $_POST["authperson"] . "','" . $_POST["sec_authperson"] . "','" . $_POST["wrk_typ"] . "','" . $epfEntitleDate . "','" . $_POST["emp_dip"] . "','" . $futureDate . "','" . $_POST["privtype"] . "','" . $_POST["opd_claim"] . "','" . $_POST["ipd_claim"] . "')";
             $return = SUD($insertQuery);
 
             //save allowances
@@ -179,6 +179,12 @@ if (isset($_POST["submit"])) {
                 unset($newPOST["epf_entitle_date"]);
                 unset($newPOST["emp_dip"]);
                 unset($newPOST["privtype"]);
+                unset($newPOST["opd_claim"]);
+                unset($newPOST["ipd_claim"]);
+
+
+
+
 
 
                 $newPOST2 = $_POST;
@@ -232,6 +238,8 @@ if (isset($_POST["submit"])) {
                 unset($newPOST2["epf_entitle_date"]);
                 unset($newPOST2["emp_dip"]);
                 unset($newPOST2["privtype"]);
+                unset($newPOST2["opd_claim"]);
+                unset($newPOST2["ipd_claim"]);
 
                 $keys = array_keys($newPOST);
                 $keys2 = array_keys($newPOST2);
@@ -371,7 +379,7 @@ if (isset($_POST["submit"])) {
             $DOBDate = $_POST["dob"];
         }
 
-        $updateQuery = "update user set fname='" . $_POST["fn"] . "',mname='" . $_POST["cn"] . "',lname='" . $_POST["full_n"] . "',nic='" . $_POST["nic"] . "',tpno='" . $_POST["tpno"] . "',lpno='" . $_POST["lpno"] . "',dob='" . $DOBDate . "',email='" . $_POST["email"] . "',school='" . $_POST["school"] . "',gender='" . $_POST["gender"] . "',presentSalary='" . $customSal . "',expectedSalery='0',registerdDate='" . $registeredDate . "',address='" . $aid . "',permanentAddress='" . $paid . "',emppost_id='" . $emp_post . "',MaritalStatus_idMaritalStatus='" . $_POST["mstatus"] . "',EmployeeType_etid='" . $_POST["etype"] . "',imageURL='" . $imageURL . "',isactive='" . $_POST["status"] . "',jobcode='" . $_POST["jc"] . "',epfno='" . $_POST["epf"] . "', bankno='" . $_POST["bno"] . "', bank = '" . $_POST["bbr"] . "', payeetax='" . $_POST["ptax"] . "', emp_act='" . $_POST["empact"] . "',prob_end_date='" . $probEndDate . "',auth_person_id='" . $_POST["authperson"] . "',sec_auth_person_id='" . $_POST["sec_authperson"] . "',work_typ='" . $_POST["wrk_typ"] . "',epf_entitle_date='" . $epfEntitleDate . "',dept_id='" . $_POST["emp_dip"] . "',first_year_leave_end_date='" . $futureDate . "',priv_typ='" . $_POST["privtype"] . "' where uid = '" . $_POST["uid"] . "'";
+        $updateQuery = "update user set fname='" . $_POST["fn"] . "',mname='" . $_POST["cn"] . "',lname='" . $_POST["full_n"] . "',nic='" . $_POST["nic"] . "',tpno='" . $_POST["tpno"] . "',lpno='" . $_POST["lpno"] . "',dob='" . $DOBDate . "',email='" . $_POST["email"] . "',school='" . $_POST["school"] . "',gender='" . $_POST["gender"] . "',presentSalary='" . $customSal . "',expectedSalery='0',registerdDate='" . $registeredDate . "',address='" . $aid . "',permanentAddress='" . $paid . "',emppost_id='" . $emp_post . "',MaritalStatus_idMaritalStatus='" . $_POST["mstatus"] . "',EmployeeType_etid='" . $_POST["etype"] . "',imageURL='" . $imageURL . "',isactive='" . $_POST["status"] . "',jobcode='" . $_POST["jc"] . "',epfno='" . $_POST["epf"] . "', bankno='" . $_POST["bno"] . "', bank = '" . $_POST["bbr"] . "', payeetax='" . $_POST["ptax"] . "', emp_act='" . $_POST["empact"] . "',prob_end_date='" . $probEndDate . "',auth_person_id='" . $_POST["authperson"] . "',sec_auth_person_id='" . $_POST["sec_authperson"] . "',work_typ='" . $_POST["wrk_typ"] . "',epf_entitle_date='" . $epfEntitleDate . "',dept_id='" . $_POST["emp_dip"] . "',first_year_leave_end_date='" . $futureDate . "',priv_typ='" . $_POST["privtype"] . "',opd_claim_value='" . $_POST["opd_claim"] . "',ipd_claim_value='" . $_POST["ipd_claim"] . "' where uid = '" . $_POST["uid"] . "'";
         $return = SUD($updateQuery);
 
         // remove all allowances
@@ -436,6 +444,8 @@ if (isset($_POST["submit"])) {
         unset($newPOST["epf_entitle_date"]);
         unset($newPOST["emp_dip"]);
         unset($newPOST["privtype"]);
+        unset($newPOST["opd_claim"]);
+        unset($newPOST["ipd_claim"]);
 
 
         $newPOST2 = $_POST;
@@ -489,6 +499,9 @@ if (isset($_POST["submit"])) {
         unset($newPOST2["epf_entitle_date"]);
         unset($newPOST2["emp_dip"]);
         unset($newPOST2["privtype"]);
+        unset($newPOST["opd_claim"]);
+        unset($newPOST["ipd_claim"]);
+
 
         $keys = array_keys($newPOST);
         $keys2 = array_keys($newPOST2);
@@ -629,14 +642,14 @@ if (isset($_REQUEST["request"])) {
                 $outaaa .= $resultss["alw"] . "%%" . $resultss["amount"] . "%%";
             }
 
-            $req = Search("select request_type from add_employee_request_approve where requested_user = '" . $_SESSION["uid"] . "' and request_status = '1' and subject_user = '" . $_REQUEST["uid"] . "'");
-            while ($resultreq = mysqli_fetch_assoc($req)) {
-                $outreq .= $resultreq["request_type"] . "/@/";
-            }
+            // $req = Search("select request_type from add_employee_request_approve where requested_user = '" . $_SESSION["uid"] . "' and request_status = '1' and subject_user = '" . $_REQUEST["uid"] . "'");
+            // while ($resultreq = mysqli_fetch_assoc($req)) {
+            //     $outreq .= $resultreq["request_type"] . "/@/";
+            // }
         } else {
             $out = "usernotfound";
         }
-        echo $out . "#" . $outals . "#" . $outaaa . "#" . $outreq;
+        echo $out . "#" . $outals . "#" . $outaaa;
     } else if ($_REQUEST["request"] == "getEmpsbyEPFNo") {
         $query = "select * from user where epfno = '" . $_REQUEST["epf"] . "'";
         $res = Search($query);
@@ -656,14 +669,14 @@ if (isset($_REQUEST["request"])) {
                 $outaaa .= $resultss["alw"] . "%%" . $resultss["amount"] . "%%";
             }
 
-            $req = Search("select request_type from add_employee_request_approve wher requested_user = '" . $_SESSION["uid"] . "' and request_status = '1' and subject_user = '" . $result["uid"] . "'");
-            while ($resultreq = mysqli_fetch_assoc($req)) {
-                $outreq .= $resultreq["request_type"] . "/@/";
-            }
+            // $req = Search("select request_type from add_employee_request_approve wher requested_user = '" . $_SESSION["uid"] . "' and request_status = '1' and subject_user = '" . $result["uid"] . "'");
+            // while ($resultreq = mysqli_fetch_assoc($req)) {
+            //     $outreq .= $resultreq["request_type"] . "/@/";
+            // }
         } else {
             $out = "usernotfound";
         }
-        echo $out . "#" . $outals . "#" . $outaaa . "#" . $outreq;
+        echo $out . "#" . $outals . "#" . $outaaa;
     } else if ($_REQUEST["request"] == "getAddress") {
         $query = "select address from address where aid = '" . $_REQUEST["aid"] . "'";
         $res = Search($query);

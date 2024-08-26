@@ -258,15 +258,17 @@ while ($result = mysqli_fetch_assoc($res)) {
                         $("#epf_entitle_date").val(arr[35]);
                         $("#emp_dip").val(arr[36]);
                         $("#privtype").val(arr[38]);
+                        $("#opd_claim").val(arr[39]);
+                        $("#ipd_claim").val(arr[40]);
 
                         //get allowances
-                        var arral = arr[39].split("//");
+                        var arral = arr[41].split("//");
                         $("#attal").val(arral[1]);
                         $("#tral").val(arral[2]);
                         $("#othal").val(arral[0]);
 
                         //get allowances
-                        var arrother = arr[40].split("%%");
+                        var arrother = arr[42].split("%%");
 
                         if (arrother == "") {
                             $('#etraAllow').hide();
@@ -433,15 +435,17 @@ while ($result = mysqli_fetch_assoc($res)) {
                         $("#epf_entitle_date").val(arr[35]);
                         $("#emp_dip").val(arr[36]);
                         $("#privtype").val(arr[38]);
+                        $("#opd_claim").val(arr[39]);
+                        $("#ipd_claim").val(arr[40]);
 
                         //get allowances
-                        var arral = arr[39].split("//");
+                        var arral = arr[41].split("//");
                         $("#attal").val(arral[1]);
                         $("#tral").val(arral[2]);
                         $("#othal").val(arral[0]);
 
                         //get allowances
-                        var arrother = arr[40].split("%%");
+                        var arrother = arr[42].split("%%");
 
                         if (arrother == "") {
                             $('#etraAllow').hide();
@@ -2055,6 +2059,28 @@ while ($result = mysqli_fetch_assoc($res)) {
                                                         <?php } ?>
                                                         <option value="0">No Privileges</option>
                                                     </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td height="35px;" width="225px;">&nbsp;</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="35px;" width="225px;">
+                                                    <p class="form-label">OPD Value Limit</p>
+                                                </td>
+                                                <td><input id="opd_claim" type="text" name="opd_claim" value="0"
+                                                        class="input-text">
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td height="35px;" width="225px;">
+                                                    <p class="form-label">IPD Value Limit</p>
+                                                </td>
+                                                <td><input id="ipd_claim" type="text" name="ipd_claim" value="0"
+                                                        class="input-text">
                                                 </td>
                                             </tr>
 
